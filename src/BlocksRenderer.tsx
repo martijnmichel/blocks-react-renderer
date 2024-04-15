@@ -165,7 +165,6 @@ const defaultComponents: ComponentsContextValue = {
 
 /* -------------------------------------------------------------------------------------------------
  * Context to pass blocks and inline components to the nested components
- * -----------------------------------------------------------------------------------------------*/
 
 const ComponentsContext = React.createContext<ComponentsContextValue>(defaultComponents);
 
@@ -185,6 +184,7 @@ function useComponentsContext() {
   return React.useContext(ComponentsContext);
 }
 
+ * -----------------------------------------------------------------------------------------------*/
 /* -------------------------------------------------------------------------------------------------
  * BlocksRenderer
  * -----------------------------------------------------------------------------------------------*/
@@ -213,19 +213,11 @@ const BlocksRenderer = (props: BlocksRendererProps) => {
   const missingModifierTypes = React.useRef<string[]>([]);
 
   return (
-    <ComponentsProvider
-      value={{
-        blocks,
-        modifiers,
-        missingBlockTypes: missingBlockTypes.current,
-        missingModifierTypes: missingModifierTypes.current,
-      }}
-    >
+    
       {/* TODO use WeakMap instead of index as the key */}
       {props.content.map((content, index) => (
         <Block content={content} key={index} />
       ))}
-    </ComponentsProvider>
   );
 };
 
@@ -234,4 +226,4 @@ const BlocksRenderer = (props: BlocksRendererProps) => {
  * -----------------------------------------------------------------------------------------------*/
 
 export type { RootNode, Node, GetPropsFromNode };
-export { ComponentsProvider, useComponentsContext, BlocksRenderer };
+export { BlocksRenderer };
